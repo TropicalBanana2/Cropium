@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "crop-pilot",
+  "version": "${version}",
+  "name": "Cropium",
+  "description": "Authorized Fabric automation suite with crop and mine routing, glow tracking, merchant handling, and pet egg workflows.",
+  "authors": ["salesfarm"],
+  "license": "MIT",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["com.salesfarm.croppilot.CropPilotClient"]
+  },
+  "mixins": [
+    {
+      "config": "crop-pilot.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "~26.2",
+    "java": ">=25",
+    "fabric-api": "*"
+  }
+}

@@ -1,0 +1,84 @@
+plugins {
+    id "net.fabricmc.fabric-loom" version "${loom_version}"
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        "crop-pilot" {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+}
+
+processResources {
+    inputs.property "version", project.version
+    filesMatching("fabric.mod.json") {
+        expand "version": project.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 25
+}
+
+java {
+    toolchain.languageVersion = JavaLanguageVersion.of(25)
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_25
+    targetCompatibility = JavaVersion.VERSION_25
+}
+
+tasks.named("jar") {
+    from("LICENSE") {
+        rename { "LICENSE_${project.archives_base_name}" }
+    }
+}
+
+tasks.withType(AbstractArchiveTask).configureEach {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+}
+
+tasks.register("motionSelfTest", JavaExec) {
+    dependsOn classes
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = "com.salesfarm.croppilot.MotionMath"
+    enableAssertions = true
+}
+
+// Java's source-file launcher keeps client source-contract checks portable,
+// without adding PowerShell or a test framework to the build requirements.
+def checkJava = javaToolchains.launcherFor {
+    languageVersion = JavaLanguageVersion.of(25)
+}
+
+tasks.register("clientSourceContracts", Exec) {
+    group = "verification"
+    description = "Checks shared input, safety and HUD source contracts."
+    workingDir = projectDir
+    commandLine checkJava.get().executablePath.asFile,
+        file("tools/checks/ClientSourceContracts.java"), projectDir
+}
+
+tasks.named("motionSelfTest") {
+    group = "verification"
+    description = "Runs assertion-based movement, routing and workflow regressions."
+}
+
+check.dependsOn motionSelfTest, clientSourceContracts

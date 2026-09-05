@@ -1,0 +1,9 @@
+{
+  "key.category.crop-pilot": "Cropium",
+  "key.crop-pilot.bounds": "Set next bounds corner",
+  "key.crop-pilot.toggle": "Start or stop harvesting",
+  "key.crop-pilot.pause": "Pause or resume",
+  "key.crop-pilot.clear": "Clear bounds",
+  "key.crop-pilot.config": "Open Cropium",
+  "key.crop-pilot.scan": "Scan selected field"
+}

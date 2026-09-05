@@ -1,0 +1,4 @@
+# Optional map inspection/generation tools; not needed to build or run the mod.
+nbtlib
+numpy
+scipy

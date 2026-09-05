@@ -1,0 +1,39 @@
+# Build output and development game instances
+.gradle/
+build/
+dist/
+run/
+out/
+
+# Personal game data and diagnostics (never publish these)
+config/
+logs/
+crash-reports/
+saves/
+screenshots/
+*.log
+*.hprof
+
+# Editors
+*.iml
+.idea/
+.vscode/
+
+# Optional Python map tools
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+
+# Local credentials and OS files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.keystore
+*.jks
+.DS_Store
+Thumbs.db
+desktop.ini
