@@ -2,7 +2,10 @@
 
 A client-side Fabric mod for crop harvesting, mine harvesting, egg hatching, and merchant workflows. Built around the Sales Minehut layout and menus—not a general-purpose bot for arbitrary servers.
 
-Use only in your own test world or on servers that explicitly allow automation. Server menus, permissions, and latency can affect operation; safeguards are not a guarantee of unattended operation.
+Use only in your own test world though it is compatible with the server Sales.minehut.gg
+
+## Use the release
+If you don't find yourself enticed to build it by yourself, download the release. You can check it yourself for anything sus.
 
 ## What it does
 
@@ -36,10 +39,6 @@ Copy `build/libs/cropium-1.0.0.jar` and Fabric API into your Minecraft instance'
 The bundled farm/mine layouts are location-specific. Plot bounds must be configured before NPC placement. Saved settings stay in the instance's `config` folder; existing `crop-pilot` filenames are retained for compatibility.
 
 See the [user guide](docs/user-guide.md) for controls, setup, safety behavior, and module details. See [development and publishing](docs/development.md) for the source layout, checks, and GitHub commands.
-
-## Automated builds
-
-The included GitHub Actions workflow runs checks and builds on Windows for pushes and pull requests. Successful runs expose downloadable jars under **Actions → Build → Artifacts**. It does not create releases or publish packages automatically.
 
 ## License
 
